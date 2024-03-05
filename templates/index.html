@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{%endblock%}
+
+{%block body%}
+
+<h1>Matrix Calculator</h1>
+<form action="/" method="POST" id="matrixForm">
+    <div class="form-control">
+        <label for="mainChoice">Type de Calcul :</label>
+        <select id="mainChoice" name="mainChoice" class="main-select">
+            <option value="choice1">Résolution d'un Système Linéaire</option>
+            <option value="choice2">Multiplication Matrice-Vecteur</option>
+            <option value="choice3">Multiplication Matrice-Matrice</option>
+        </select>
+    </div>
+    <div class="form-control">
+        <label for="method">Méthode de Calcul :</label>
+        <select id="method" name="method" class="method-select">
+                        
+        </select>
+    </div>
+    <div class="form-control" id="bandwidth-input" style="display: none;">
+        <label for="bandwidth-general">Entrer la largeur de votre matrice :</label>
+        <input type="number" id="bandwidth-general" name="bandwidth-general" class="matrix-input">
+    </div>
+    <div class="form-control" id="bandwidth-input-s" style="display: none;">
+        <label for="bandwidth-s">Entrer la largeur S+1 pour la première matrice :
+        </label>
+        <input type="number" id="bandwidth-s" name="bandwidth-s" class="matrix-input" step="any">
+    </div>
+    
+    <div class="form-control" id="bandwidth-input-r" style="display: none;">
+        <label for="bandwidth-r">Entrer la largeur R+1 pour la deuxième matrice :</label>
+        <input type="number" id="bandwidth-r" name="bandwidth-r" class="matrix-input" step="any">
+    </div>
+
+    <div class="form-control" id="bandwidth-input-m" style="display: none;">
+        <label for="bandwidth-m">Entrer le maximun d'itérations :</label>
+        <input type="number" id="bandwidth-m" name="bandwidth-m" class="matrix-input" step="any">
+    </div>
+
+    <div class="form-control" id="bandwidth-input-e" style="display: none;">
+        <label for="bandwidth-e">Entrer ε :</label>
+        <input type="number" id="bandwidth-e" name="bandwidth-e" class="matrix-input" step="any">
+    </div>
+    <fieldset class="matrix-fieldset">
+        <legend>Pour effectuer le calcul, veuillez suivre ces instructions : </legend>
+        <div id="description" class="description-style"></div>
+      </fieldset>
+    </div>
+    <fieldset class="matrix-fieldset">
+        <legend>Le système d'équations :</legend>
+        <table id="matrix-table-inner" class="matrix-table">
+            {% for i in range(3) %}
+            <tr>
+                {% for j in range(3) %}
+                <td>
+                    <input type="text" id="A-{{ i }}-{{ j }}" name="A-{{ i }}-{{ j }}" class="matrix-table-input">
+                </td>
+                {% endfor %}
+                <td class="equal-sign">=</td> 
+                <td class ="vecteur-inputs">
+                    <input type="text" id="B-{{ i }}" name="B-{{ i }}" class="matrix-table-input">
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <input type="hidden" id="matrix-size" name="matrix-size" value="3"> <!-- Initial value of n -->
+        <div class="button-group">
+            <button type="button" id="addRowButton" class="matrix-btn add-btn">+</button>
+            <button type="button" id="removeRowButton" class="matrix-btn remove-btn">-</button>
+        </div>
+    </fieldset>
+    <input type="hidden" id="matrix2-rows" name="matrix2-rows" value="0">
+    <input type="hidden" id="matrix2-cols" name="matrix2-cols" value="0">
+    <input type="hidden" id="matrix-rows" name="matrix-rows" value="3">
+    <input type="hidden" id="matrix-cols" name="matrix-cols" value="3">
+
+    <button id="calculateButton" class="calculate-btn" type="submit">Calculer</button>
+
+</form>
+
+<div id="errorMessage" class="error-message"></div>
+
+<div id="result" class="result">
+   
+</div>
+
+
+<footer>
+    <div class="author">
+        <span>
+            Created with <i class="fa-solid fa-heart"></i> by Salsabil Ben Halima & Fedi Bouattour
+        </span>
+        <div class="footer-links">
+            <a href="https://github.com/salsabil812" target="_blank">
+                <i class="fa-brands fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/salsabil-ben-hlima/" target="_blank">
+                <i class="fa-brands fa-linkedin"></i>
+            </a>
+        </div>
+    </div>
+
+    <div>
+        <div class="supervisors-wrapper">
+            <div>
+                Supervisor: Dr. Sirine MARRAKCHI
+            </div>
+        
+            <div>
+                Subject: Numerical Algorithms
+            </div>
+        
+            <div>
+                Major: Data Engineering
+            </div>
+        
+            <div>
+                Institution: Faculty of Science of Sfax
+            </div>
+        
+            <div>
+                Department: Computer Science and Communications
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+{%endblock%}
